@@ -1,3 +1,6 @@
 dist-newstyle/*
 dist/*
 .ghc.environment*
+.stack-work/*
+data/*
+ChangeLog.md
