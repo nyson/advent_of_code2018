@@ -4,6 +4,7 @@ module Day3 where
 import Data.Char (isDigit)
 import Text.Read (readPrec, get, step, lexP)
 import Data.List (group, sort, nubBy)
+import Driver
 
 data Rect = Rect { claim  :: Int
                  , left   :: Int, top    :: Int
@@ -23,14 +24,6 @@ rectPos :: Rect -> [(Int, Int)]
 rectPos Rect {..} = [ (x,y) | x <- [left .. left + width  - 1]
                             , y <- [top  .. top  + height - 1]
                             ]
-
--- | nubBy, but also checks against already nubbed elements
-goodNubBy :: (a -> a -> Bool) -> [a] -> [a]
-goodNubBy f xs = gnb f [] xs
-  where gnb _ _  [] = []
-        gnb f rms (x:xs)
-          | any (f x) xs || any (f x) rms = gnb f (x:rms) xs
-          | otherwise = x:gnb f rms xs
 
 -- | check if two rectangles overlaps
 overlaps :: Rect -> Rect -> Bool
